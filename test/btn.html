@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../src/css/base.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/btn.css">
+	<style type="text/css">
+		body{font-family: 宋体}
+	</style>
+</head>
+<body>
+	<h1>btn</h1>
+	<p>
+		<button>test</button>
+		<button data-options="type:'info',iconCls:'icon-edit'">test</button>
+		<button data-options="type:'primary',iconCls:'icon-add'">test</button>
+		<button data-options="type:'warning',iconCls:'icon-remove'">test</button>
+		<button data-options="type:'danger',iconCls:'icon-ok'">test</button>
+		<button data-options="type:'success',iconCls:'icon-cancel'">test</button>
+	</p>
+	<p>
+		<a href='#'>test</a>
+		<a href='#' data-options="type:'info',iconCls:'icon-edit'">test</a>
+		<a href='#' data-options="type:'primary',iconCls:'icon-add'">test</a>
+		<a href='#' data-options="type:'warning',iconCls:'icon-remove'">test</a>
+		<a href='#' data-options="type:'danger',iconCls:'icon-ok'">test</a>
+		<a href='#' data-options="type:'success',iconCls:'icon-cancel'">test</a>	
+	</p>
+	<p>
+		<a href='#' data-options="toggle:true,disabled:true">test</a>
+		<a href='#' data-options="type:'info',iconCls:'icon-edit',toggle:true">test</a>
+		<a href='#' data-options="type:'primary',iconCls:'icon-add',toggle:true">test</a>
+		<a href='#' data-options="type:'warning',iconCls:'icon-remove',toggle:true">test</a>
+		<a href='#' data-options="type:'danger',iconCls:'icon-ok',toggle:true">test</a>
+		<a href='#' data-options="type:'success',iconCls:'icon-cancel',toggle:true">test</a>	
+	</p>
+	<h2>grp:aaa</h2>
+	<p style="font-size:0px">
+		<a href='#' data-options="grp:'aaa',disabled:false">test</a>
+		<a href='#' data-options="iconCls:'icon-edit',grp:'aaa'">test</a>
+		<a href='#' data-options="iconCls:'icon-add',grp:'aaa'">test</a>
+		<a href='#' data-options="iconCls:'icon-remove',grp:'aaa'">test</a>
+		<a href='#' data-options="iconCls:'icon-ok',grp:'aaa'">test</a>
+		<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa'">test</a>	
+	</p>
+	<h2>grp:aaa1</h2>
+	<p style="font-size:0px" id='ppppp'>
+		<a href='#' data-options="grp:'aaa1',disabled:false">test</a>
+		<a href='#' data-options="iconCls:'icon-edit',grp:'aaa1'">test</a>
+		<a href='#' data-options="iconCls:'icon-add',grp:'aaa1'">test</a>
+		<span id='remove'>
+			<a id='remove11' href='#' data-options="iconCls:'icon-remove',grp:'aaa1',disabled:true">test</a>
+			<a href='#' data-options="iconCls:'icon-ok',grp:'aaa1'">test</a>
+			<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa1',disabled:true">test</a>	
+		</span>
+	</p>
+	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
+	<script src='../src/js/base.js'></script>
+	<script src='../src/js/btn.js'></script>
+	<script>
+		$(function(){
+			$("button,a").btn();
+		});
+	</script>
+</body>
+</html>

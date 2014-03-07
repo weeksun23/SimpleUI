@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+	<style type="text/css">
+		body{margin: 0;padding:0;font-size: 12px;}
+		.page{margin:30px auto;width: 1000px;overflow: hidden;}
+		.page>div{height: 100%;border:1px solid #ccc;height: 600px;}
+		.page-bar{width: 180px;float: left;}
+		.page-nav{list-style: none;margin: 10px 0px 0px 0px;padding: 0;}
+		.page-nav li{text-align: center;margin-bottom: 5px;}
+		.page-nav a{text-decoration: none;padding: 8px 3px;width:100px;border:1px solid #ccc;color: #333;display: inline-block;}
+		.page-nav a:hover{background-color: #888;color: #fff;}
+		.page-content{width: 800px;float: right;}
+		.page-content iframe{width: 100%;height: 100%;}
+	</style>
+</head>
+<body>
+	<div class='page'>
+		<div class='page-bar'>
+			<ul class='page-nav'>
+				<li><a href='btn.html' target="content">btn</a></li>
+				<li><a href='menu.html' target="content">menu</a></li>
+				<li><a href='menubutton.html' target="content">menubutton</a></li>
+				<li><a href='tree.html' target="content">tree</a></li>
+			</ul>
+		</div>
+		<div class='page-content'>
+			<iframe frameborder='0' scrolling='no' name='content'></iframe>
+		</div>
+	</div>
+</body>
+</html>

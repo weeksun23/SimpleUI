@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../src/css/base.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/menu.css">
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<h1>menu</h1>
+	<!--
+	<div class='menu' style='left:100px;top:100px;' id='menu'>
+		<div class='menu-item'>
+			<i class='icon-save'></i>
+			<span class='menu-text'>wew</span>
+			<span class='menu-arrow'></span>
+		</div>
+		<div class='menu-item'>
+			<i class='icon-save'></i>
+			<span class='menu-text'>fw</span>
+			<span class='menu-arrow'></span>
+		</div>
+		<div class='menu-line'></div>
+	</div>
+	-->
+	<div id='test' style='display:none;left:200px;top:200px;'>
+		<div data-options="iconCls:'icon-save'">wew</div>
+		<div data-options="iconCls:'icon-save'" id='item1'>
+			<span>sdvgsggergf</span>
+			<div>
+				<div data-options="iconCls:'icon-save',disabled:true" id='item2'>wew</div>
+				<div data-options="iconCls:'icon-save'">
+					<span>grwegregr</span>
+					<div id='submenu1'>
+						<div data-options="iconCls:'icon-save'">wew</div>
+						<div data-options="iconCls:'icon-save'">
+							<span>grwegregr</span>
+							<div>
+								<div data-options="iconCls:'icon-save'">wew</div>
+								<div data-options="iconCls:'icon-save'">
+									<span>grwegregr</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-options="iconCls:'icon-save',disabled:false" id='item3'>wewefeee</div>
+				<div data-options="iconCls:'icon-save',disabled:true" id='item4'>wefeww</div>
+				<div data-options="iconCls:'icon-save',disabled:true" id='item5'>wdewfew</div>
+			</div>
+		</div>
+	</div>
+	<button id='btn'>test</button>
+	<!-- 
+	<ul class='menu' style='left:100px;top:100px;' id='menu'>
+		<li class='menu-line'></li>
+		<li class='menu-item'>
+			<i class='icon-save'></i>
+			<span class='menu-text'>wewe22ee</span>
+			<span class='menu-arrow'></span>
+		</li>
+	</ul> -->
+	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
+	<script src='../src/js/base.js'></script>
+	<script src='../src/js/menu.js'></script>
+	<script>
+		$(function(){
+			$("#test").menu().menu("show",{
+				left : 100,top : 200
+			});
+			$("#btn").click(function(){
+				$("#test").menu("setItemText",$("#item1"),"dfdfdfdfdfdfdfdfdf");
+				$("#test").menu("setItemText",$("#item2"),"55555555555555555555555555555");
+			});
+			$(document).contextmenu(function(e){
+				e.preventDefault();
+				$("#test").menu("show",{
+					left : e.pageX,top : e.pageY
+				});
+			});
+		});
+	</script>
+</body>
+</html>
