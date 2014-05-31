@@ -18,6 +18,17 @@
 		},
 		getOptionsNotDefault : function($this,jsOpts){
 			return $.extend(parseOptions($this.attr("data-options")),jsOpts);
+		},
+		getPartOfObj : function(obj,attrArr){
+			var result = {};
+			for(var i=0,ii=attrArr.length;i<ii;i++){
+				var item = attrArr[i];
+				var val = obj[item];
+				if(val !== undefined){
+					result[item] = val;
+				}
+			}
+			return result;
 		}
 	};
 })(jQuery);

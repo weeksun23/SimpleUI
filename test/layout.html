@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../src/css/base.css">
+	<style type="text/css">
+		.layout{}
+		.layout-fit{height: 100%;width: 100%;}
+		.layout-item{position: absolute;}
+		.layout-north{left: 0;right: 0;top:0;}
+		.layout-west{left:0;}
+		.layout-south{left: 0;right: 0;bottom: 0;}
+		.layout-east{right: 0;}
+	</style>
+</head>
+<body>
+	<div id='page' data-options='fit:true,minHeight:400,minWidth:400'>
+		<div data-options="region:'north',height:40,padding:5"></div>
+		<div data-options="region:'center'"></div>
+		<div data-options="region:'west',width:200"></div>
+		<div data-options="region:'east',width:200"></div>
+		<div data-options="region:'south',height:50"></div>
+	</div>
+	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
+	<script src='../src/js/base.js'></script>
+	<script src='../src/js/layout.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#page').layout();
+		});
+	</script>
+</body>
+</html>
