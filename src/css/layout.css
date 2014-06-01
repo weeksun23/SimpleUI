@@ -1,0 +1,9 @@
+.layout-split{position: absolute;background-color: #f2f2f2;}
+.layout-split-eastwest{width: 5px;cursor: w-resize;}
+.layout-split-northsouth{height: 5px;left: 0;right: 0;cursor: n-resize;}
+.layout-fit{height: 100%;width: 100%;}
+.layout-item{position: absolute;}
+.layout-north{left: 0;right: 0;top:0;}
+.layout-west{left:0;}
+.layout-south{left: 0;right: 0;bottom: 0;}
+.layout-east{right: 0;}

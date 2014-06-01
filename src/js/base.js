@@ -13,7 +13,7 @@
 	$.simple = {
 		//defaultOpts htmlOpts jsOpts
 		getOptions : function(defaultOpts,$this,jsOpts){
-			var copyOpts = $.extend(defaultOpts,{});
+			var copyOpts = $.extend({},defaultOpts);
 			return $.extend(copyOpts,parseOptions($this.attr("data-options")),jsOpts);
 		},
 		getOptionsNotDefault : function($this,jsOpts){
@@ -29,6 +29,14 @@
 				}
 			}
 			return result;
+		},
+		dealTpl : function(tpl,obj){
+			for(var i in obj){
+				var reg = new RegExp("\\$\\{" + i + "\\}","g");
+				var val = obj[i];
+				tpl = tpl.replace(reg,val);
+			}
+			return tpl;
 		}
 	};
 })(jQuery);
