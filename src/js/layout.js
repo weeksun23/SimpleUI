@@ -1,5 +1,5 @@
 /*
-	simple-layout : 1.0
+simple-layout by weeksun23 2014-05-31
 */
 (function($,undefined){
 	"use strict";
@@ -38,7 +38,7 @@
 		//number[0->padding:0px|5->padding:5px]
 		padding : '0'
 	};
-	//box width + padding + borderWidth
+	//boxwidth = width + padding + borderWidth
 	function dealBox(border,padding){
 		var borderCss,borderArr,paddingCss,paddingArr;
 		if(!border){
@@ -130,6 +130,7 @@
 					right = 0,
 					//west center east的bottom值
 					bottom = 0;
+				//顺序 north,south -> east,west -> center
 				$this.children("div[data-options]").each(function(){
 					var $region = $(this);
 					var regionOpts = getOptions(defaultRegionOptions,$region,{});
@@ -139,10 +140,12 @@
 					var cssObj = boxInfo.css;
 					$region.addClass("layout-item simple-border layout-" + region);
 					if(region === 'center'){
+						//缓存center，最后处理
 						$center = $region;
 						centerCssObj = cssObj;
 						return;
 					}else if(region === 'west' || region === 'east'){
+						//先缓存west east，待处理完north south后再处理
 						var w = getSize($region,cssObj,boxInfo,regionOpts.width,'width');
 						if(region === 'west'){
 							left = w;
