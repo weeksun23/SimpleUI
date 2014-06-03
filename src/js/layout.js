@@ -4,6 +4,10 @@ simple-layout by weeksun23 2014-05-31
 (function($,undefined){
 	"use strict";
 	var SPLIT_WIDTH = 5;
+	var REGION_MIN_WIDTH = 10;
+	var REGION_MIN_HEIGHT = 10;
+	var CENTER_MIN_HEIGHT = 10;
+	var CENTER_MIN_WIDTH = 10;
 	var defaultOptions = {
 		//boolean[true:宽高为100%，对body标签无效|false:指定width height]
 		fit : true
@@ -90,6 +94,52 @@ simple-layout by weeksun23 2014-05-31
 			size = $region.width();
 		}
 		return size + boxInfo[key];
+	}
+	//为split绑定移动resize事件
+	function attachDragForSplit($splits,$this){
+		$splits.mousedown(function(downE){
+			downE.preventDefault();
+			var $clone = $(this).clone().addClass("layout-split-clone").appendTo($this);
+			var region = $(this).attr("data-region");
+			var min,max,moveKey;
+			switch(region){
+				case "north":
+					moveKey = 'top';
+					min = REGION_MIN_HEIGHT;
+					max = $this.children("div[data-region='south']").position().top - CENTER_MIN_HEIGHT;
+					break;
+				case "south":
+					moveKey = 'bottom';
+					min = REGION_MIN_HEIGHT;
+					max = $this.children("div.layout-center") - CENTER_MIN_HEIGHT;
+					break;
+				case "west":
+					moveKey = 'left';
+					min = REGION_MIN_WIDTH;
+					break;
+				case "east":
+					moveKey = 'right';
+					min = REGION_MIN_WIDTH;
+					break;
+			}
+			var start = parseInt($clone.css(moveKey),10);
+			$("<div class='layout-split-mask'></div>")
+			.appendTo($this)
+			.on("mousemove.layoutSplit",function(e){
+				var dLeft = e.pageX - downE.pageX;
+				var dTop = e.pageY - downE.pageY;
+				switch(region){
+					case "north":var newVal = start + dTop;break;
+					case "south":newVal = start - dTop;break;
+					case "west":newVal = start + dLeft;break;
+					case "east":newVal = start - dLeft;break;
+				}
+				$clone.css(moveKey,newVal);
+			}).on("mouseup.layoutSplit",function(){
+				$clone.remove();
+				$(this).remove();
+			});
+		});
 	}
 	var layout = $.fn.layout = function(options){
 		var outerArguments = arguments;
@@ -214,7 +264,9 @@ simple-layout by weeksun23 2014-05-31
 				centerCssObj.right = right;
 				$center.css(centerCssObj);
 				if(splitHtml.length > 0){
-					$this.append(splitHtml.join(""));
+					var $splitHtml = $(splitHtml.join(""));
+					$this.append($splitHtml);
+					attachDragForSplit($splitHtml,$this);
 				}
 			}
 		});

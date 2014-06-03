@@ -7,3 +7,5 @@
 .layout-west{left:0;}
 .layout-south{left: 0;right: 0;bottom: 0;}
 .layout-east{right: 0;}
+.layout-split-clone{background-color: #bbb;z-index: 99;}
+.layout-split-mask{position: absolute;top: 0;right: 0;left:0;bottom: 0;z-index: 100;}
