@@ -95,50 +95,95 @@ simple-layout by weeksun23 2014-05-31
 		}
 		return size + boxInfo[key];
 	}
+	//获取split能移动的距离的最大值
+	function getMax($center,key,isHeight){
+		var d,min;
+		if(isHeight){
+			d = $center.outerHeight();
+			min = CENTER_MIN_HEIGHT;
+		}else{
+			d = $center.outerWidth();
+			min = CENTER_MIN_WIDTH;
+		}
+		return parseInt($center.css(key),10) + d - min - SPLIT_WIDTH;
+	}
+	//根据split定位region
+	function setRegionPos($layout,region,key,val){
+		val = parseInt(val,10);
+		switch(region){
+			case "north":
+				$layout.children("div").filter(function(){
+					var $this = $(this);
+					return $this.hasClass("layout-item") || $this.hasClass("layout-split");
+				}).each(function(){
+					var $this = $(this);
+					if($this.hasClass("layout-north")){
+						var paddingBorder = $this.outerHeight() - $this.height();
+						$this.css("height",val - paddingBorder);
+					}else if($this.hasClass("layout-west") || $this.hasClass("layout-center") ||
+						$this.hasClass("layout-east") || $this.hasClass("layout-split-eastwest")){
+						$this.css("top",val + SPLIT_WIDTH);
+					}
+				});
+			case "south":
+				var isNorthSouth = true;
+				break;
+			case "west":;
+			case "east":
+				isNorthSouth = false;
+				break;
+		}
+	}
 	//为split绑定移动resize事件
-	function attachDragForSplit($splits,$this){
+	function attachDragForSplit($splits,$layout){
 		$splits.mousedown(function(downE){
 			downE.preventDefault();
-			var $clone = $(this).clone().addClass("layout-split-clone").appendTo($this);
-			var region = $(this).attr("data-region");
-			var min,max,moveKey;
+			var $split = $(this);
+			var $clone = $split.clone().addClass("layout-split-clone").appendTo($layout);
+			var region = $split.attr("data-region");
+			var $target = $layout.children("div.layout-" + region);
+			var min,moveKey;
+			var isHeight;
 			switch(region){
-				case "north":
-					moveKey = 'top';
-					min = REGION_MIN_HEIGHT;
-					max = $this.children("div[data-region='south']").position().top - CENTER_MIN_HEIGHT;
-					break;
+				case "north":;
 				case "south":
-					moveKey = 'bottom';
-					min = REGION_MIN_HEIGHT;
-					max = $this.children("div.layout-center") - CENTER_MIN_HEIGHT;
+					moveKey = region === 'south' ? 'bottom' : 'top';
+					min = REGION_MIN_HEIGHT + $target.outerHeight() - $target.height();
+					isHeight = true;
 					break;
-				case "west":
-					moveKey = 'left';
-					min = REGION_MIN_WIDTH;
-					break;
+				case "west":;
 				case "east":
-					moveKey = 'right';
-					min = REGION_MIN_WIDTH;
+					moveKey = region === 'east' ? 'right' : 'left';
+					min = REGION_MIN_WIDTH+ $target.outerWidth() - $target.width();
+					isHeight = false;
 					break;
 			}
+			var max = getMax($layout.children("div.layout-center"),moveKey,isHeight);
 			var start = parseInt($clone.css(moveKey),10);
 			$("<div class='layout-split-mask'></div>")
-			.appendTo($this)
-			.on("mousemove.layoutSplit",function(e){
-				var dLeft = e.pageX - downE.pageX;
-				var dTop = e.pageY - downE.pageY;
-				switch(region){
-					case "north":var newVal = start + dTop;break;
-					case "south":newVal = start - dTop;break;
-					case "west":newVal = start + dLeft;break;
-					case "east":newVal = start - dLeft;break;
-				}
-				$clone.css(moveKey,newVal);
-			}).on("mouseup.layoutSplit",function(){
-				$clone.remove();
-				$(this).remove();
-			});
+				.appendTo($layout)
+				.on("mousemove.layoutSplit",function(e){
+					var dLeft = e.pageX - downE.pageX;
+					var dTop = e.pageY - downE.pageY;
+					switch(region){
+						case "north":var newVal = start + dTop;break;
+						case "south":newVal = start - dTop;break;
+						case "west":newVal = start + dLeft;break;
+						case "east":newVal = start - dLeft;break;
+					}
+					if(newVal < min){
+						newVal = min;
+					}else if(newVal > max){
+						newVal = max;
+					}
+					$clone.css(moveKey,newVal);
+				}).on("mouseup.layoutSplit",function(){
+					var val = $clone.css(moveKey);
+					$split.css(moveKey,val);
+					setRegionPos($layout,region,moveKey,val);
+					$clone.remove();
+					$(this).remove();
+				});
 		});
 	}
 	var layout = $.fn.layout = function(options){
