@@ -8,11 +8,19 @@
 </head>
 <body>
 	<div id='page' data-options='fit:true,minHeight:400,minWidth:400'>
-		<div data-options="region:'north',height:40,padding:5,split:true"></div>
+		<div data-options="region:'north',height:40,padding:5,split:true">
+			<button data-region='north'>setSize</button>
+		</div>
 		<div data-options="region:'center'"></div>
-		<div data-options="region:'west',width:200,split:true"></div>
-		<div data-options="region:'east',width:200,split:true"></div>
-		<div data-options="region:'south',height:50,split:true"></div>
+		<div data-options="region:'west',width:200,split:true">
+			<button data-region='west'>setSize</button>
+		</div>
+		<div data-options="region:'east',width:200,split:true">
+			<button data-region='east'>setSize</button>
+		</div>
+		<div data-options="region:'south',height:50,split:true">
+			<button data-region='south'>setSize</button>
+		</div>
 	</div>
 	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
 	<script src='../src/js/base.js'></script>
@@ -20,6 +28,9 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#page').layout();
+			$('button').click(function(){
+				$('#page').layout("setSize",$(this).attr("data-region"),Math.random()*(200-80)+80,true);
+			});
 		});
 	</script>
 </body>

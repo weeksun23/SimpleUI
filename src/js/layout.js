@@ -23,7 +23,12 @@ simple-layout by weeksun23 2014-05-31
 		*/
 	};
 	var methods = {
-
+		setSize : function(region,size,isAnimate){
+			var $layout = $(this),
+				$split = $layout.children("div.layout-split[data-region='"+region+"']");
+			setRegionPos($split,$layout,region,size,getCssKeyByRegion(region),true);
+			return $layout;
+		}
 	};
 	var defaultRegionOptions = {
 		/*
@@ -45,6 +50,14 @@ simple-layout by weeksun23 2014-05-31
 		//number[0->padding:0px|5->padding:5px]
 		padding : '0'
 	};
+	function getCssKeyByRegion(region){
+		switch(region){
+			case "north" : return 'top';
+			case "south" : return 'bottom';
+			case "west" : return 'left';
+			case "east" : return 'right';
+		}
+	}
 	//boxwidth = width + padding + borderWidth
 	function dealBox(border,padding){
 		var borderCss,borderArr,paddingCss,paddingArr;
@@ -107,19 +120,30 @@ simple-layout by weeksun23 2014-05-31
 		}
 		return parseInt($center.css(key),10) + d - min - SPLIT_WIDTH;
 	}
+	function doAnimate($this,obj,isAnimate){
+		if(isAnimate){
+			$this.animate(obj,400);
+		}else{
+			$this.css(obj);
+		}
+	}
 	/*
 	根据split定位region
+	$split 要移动的split
 	$layout layout区域
 	region 要定位的region
 	key string[left|right|top|bottom] 要改变值的css属性
 	val 对应key要改变的css属性值,等于对应region的box所占width或height,即width+padding+borderWidth
 	*/
-	function setRegionPos($layout,region,key,val){
+	function setRegionPos($split,$layout,region,val,key,isAnimate){
 		val = parseInt(val,10);
 		var $div = $layout.children("div").filter(function(){
 			var $this = $(this);
 			return $this.hasClass("layout-item") || $this.hasClass("layout-split");
 		});
+		var obj = {};
+		obj[key] = val;
+		doAnimate($split,obj,isAnimate);
 		switch(region){
 			case "north":;
 			case "south":
@@ -127,11 +151,14 @@ simple-layout by weeksun23 2014-05-31
 					var $this = $(this);
 					if($this.hasClass("layout-" + region)){
 						var paddingBorder = $this.outerHeight() - $this.height();
-						$this.css("height",val - paddingBorder);
+						var obj = {"height" : val - paddingBorder};
+						doAnimate($this,{"height" : val - paddingBorder},isAnimate);
 					}else if($this.hasClass("layout-west") || $this.hasClass("layout-center") ||
 						//north south 要同时改变west center east以及他们之间的split的top或bottom值
 						$this.hasClass("layout-east") || $this.hasClass("layout-split-eastwest")){
-						$this.css(key,val + SPLIT_WIDTH);
+						var obj = {};
+						obj[key] = val + SPLIT_WIDTH;
+						doAnimate($this,obj,isAnimate);
 					}
 				});
 				break;
@@ -141,10 +168,12 @@ simple-layout by weeksun23 2014-05-31
 					var $this = $(this);
 					if($this.hasClass("layout-" + region)){
 						var paddingBorder = $this.outerWidth() - $this.width();
-						$this.css("width",val - paddingBorder);
+						doAnimate($this,{width : val - paddingBorder},isAnimate);
 					}else if($this.hasClass("layout-center")){
 						//west east 只需改变center的left或right值
-						$this.css(key,val + SPLIT_WIDTH);
+						var obj = {};
+						obj[key] = val + SPLIT_WIDTH;
+						doAnimate($this,obj,isAnimate);
 					}
 				});
 				break;
@@ -158,18 +187,15 @@ simple-layout by weeksun23 2014-05-31
 			var $clone = $split.clone().addClass("layout-split-clone").appendTo($layout);
 			var region = $split.attr("data-region");
 			var $target = $layout.children("div.layout-" + region);
-			var min,moveKey;
-			var isHeight;
+			var moveKey = getCssKeyByRegion(region);
 			switch(region){
 				case "north":;
 				case "south":
-					moveKey = region === 'south' ? 'bottom' : 'top';
-					min = REGION_MIN_HEIGHT + $target.outerHeight() - $target.height();
-					isHeight = true;
+					var min = REGION_MIN_HEIGHT + $target.outerHeight() - $target.height();
+					var isHeight = true;
 					break;
 				case "west":;
 				case "east":
-					moveKey = region === 'east' ? 'right' : 'left';
 					min = REGION_MIN_WIDTH+ $target.outerWidth() - $target.width();
 					isHeight = false;
 					break;
@@ -195,8 +221,7 @@ simple-layout by weeksun23 2014-05-31
 					$clone.css(moveKey,newVal);
 				}).on("mouseup.layoutSplit",function(){
 					var val = $clone.css(moveKey);
-					$split.css(moveKey,val);
-					setRegionPos($layout,region,moveKey,val);
+					setRegionPos($split,$layout,region,val,moveKey);
 					$clone.remove();
 					$(this).remove();
 				});
