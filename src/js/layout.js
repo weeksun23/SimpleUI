@@ -238,8 +238,8 @@ simple-layout by weeksun23 2014-05-31
 				}
 			}else{
 				var $this = $(this);
-				var getOptions = $.simple.getOptions;
-				var dealTpl = $.simple.dealTpl;
+				var getOptions = $.base.getOptions;
+				var dealTpl = $.base.dealTpl;
 				options = getOptions(defaultOptions,$this,options);
 				if(this.tagName.toLowerCase() !== 'body'){
 					//由于region区域都是绝对定位 所以父容器必须为相对定位或者是body标签
@@ -248,10 +248,10 @@ simple-layout by weeksun23 2014-05-31
 						//自适应
 						$this.addClass("layout-fit");
 						//最少宽度 最少高度
-						$this.css($.simple.getPartOfObj(options,['minWidth','minHeight']));
+						$this.css($.base.getPartOfObj(options,['minWidth','minHeight']));
 					}else{
 						//非自适应
-						$this.css($.simple.getPartOfObj(options,['width','height']));
+						$this.css($.base.getPartOfObj(options,['width','height']));
 					}
 				}
 				var //缓存west east

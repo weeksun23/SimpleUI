@@ -22,7 +22,7 @@
 	$.fn.menubutton = function(options){
 		return $(this).each(function(){
 			var $this = $(this);
-			var	opts = $.simple.getOptions({
+			var	opts = $.base.getOptions({
 				isTriggerOnHover : false,
 				effect : null,
 				menu : null

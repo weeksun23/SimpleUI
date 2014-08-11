@@ -1,30 +1,36 @@
 (function($){
 	"use strict";
+	/*
+	data : {
+		isPressed boolean : 是否处于按下状态
+	}
+	attribute : {
+		data-group : 所属组
+	}
+	*/
 	var btn = $.fn.btn = function(options){
-		/*
-			data : {
-				isPressed : [boolean]
-			}
-			attribute : {
-				data-group
-			}
-		*/
 		return $(this).each(function(){
-			var $this = $(this);
-			var	opts = $.simple.getOptionsNotDefault($this,options);
-			init($this,opts);
+			init($(this),options);
 		});
 	};
+	btn.defaultOptions = {
+		//是否透明背景
+		plain : false,
+		//是否禁用
+		disabled : false,
+		//图标css class
+		iconCls : null,
+		//是否toggle btn
+		toggle : false,
+		//图标颜色类型
+		type : 'default',
+		//所属按钮组
+		grp : null,
+		//按钮文字
+		text : ''
+	};
 	var init = btn.init = function($this,opts){
-		opts = $.extend({
-			plain : false,
-			disabled : false,
-			iconCls : null,
-			toggle : false,
-			type : 'default',
-			grp : null,
-			text : ''
-		},opts);
+		opts = $.base.getOptions(btn.defaultOptions,$this,opts);
 		var classList = ["btn"];
 		classList.push(opts.plain ? "btn-default plain" : "btn-" + opts.type);
 		opts.disabled && classList.push('disabled');

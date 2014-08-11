@@ -1,7 +1,7 @@
 (function($){
 	"use strict";
 	function initMenuItem($this){
-		var opts = $.simple.getOptions({
+		var opts = $.base.getOptions({
 			iconCls : null,
 			disabled : false,
 			isClickOnHide : true,
@@ -45,7 +45,7 @@
 	}
 	function initMenu($menu,options){
 		var me = this;
-		var	opts = $.simple.getOptions({
+		var	opts = $.base.getOptions({
 			width : null
 		},$menu,options);
 		$menu.hide().addClass("menu").children("div").each(function(){
