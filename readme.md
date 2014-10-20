@@ -1,4 +1,4 @@
-#模仿jquery easyui的一个UI库
+#模仿jquery easyui，致力于实现一个功能与其相当，性能更佳的UI库
 ###layout
 >通过简单配置就能实现layout布局
 >
