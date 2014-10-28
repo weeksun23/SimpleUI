@@ -9,8 +9,13 @@
 	}
 	*/
 	var btn = $.fn.btn = function(options){
+		var outerArg = arguments;
 		return $(this).each(function(){
-			init($(this),options);
+			if(typeof options === 'string'){
+				methods[options].apply(this,Array.prototype.slice.call(outerArg,1));
+			}else{
+				init($(this),options);
+			}
 		});
 	};
 	btn.defaultOptions = {
@@ -26,22 +31,38 @@
 		type : 'default',
 		//所属按钮组
 		grp : null,
+		//按钮尺寸 1 2 3
+		size : 0,
 		//按钮文字
 		text : ''
+	};
+	var methods = btn.methods = {
+		updateOptions : function(options){
+			for(var i in options){
+				if(i === 'size'){
+					this.className = this.className.replace(/btn-size[123]/,'');
+					var cls = options[i] ? ('btn-size' + options[i]) : '';
+					cls && $(this).addClass(cls);
+				}
+			}
+		}
 	};
 	var init = btn.init = function($this,opts){
 		opts = $.base.getOptions(btn.defaultOptions,$this,opts);
 		var classList = ["btn"];
+		if(opts.size){
+			classList.push("btn-size" + opts.size);
+		}
 		classList.push(opts.plain ? "btn-default plain" : "btn-" + opts.type);
 		opts.disabled && classList.push('disabled');
 		var html = "",
 			icon = opts.iconCls,
 			txt = opts.text || $this.html();
 		if(icon){
-			html += "<i class='" + icon + "'></i>";
+			html += "<i class='btn-icon " + icon + "'></i>";
 		}
 		if(txt){
-			html += "<span>" + txt + "</span>";
+			html += "<span class='btn-text'>" + txt + "</span>";
 		}
 		$this.html(html).addClass(classList.join(" "));
 		var grp = opts.grp;

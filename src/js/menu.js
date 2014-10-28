@@ -76,7 +76,7 @@
 			$(this).children("div.menu").hide();
 		});
 	}
-	$.fn.menu = function(options){
+	var menu = $.fn.menu = function(options){
 		var outerArguments = arguments;
 		return $(this).each(function(){
 			var $this = $(this);
@@ -92,7 +92,7 @@
 			}
 		});
 	};
-	var methods = $.fn.menu.methods = {
+	var methods = menu.methods = {
 		show : function(pos){
 			resizeMenu($(this).css(pos).show());
 		},

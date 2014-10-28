@@ -1,0 +1,10 @@
+body{font-family:  宋体;}
+p,input,h1,h2,h3,h4,h5{margin:0;padding: 0}
+em,i,strong{font-style: normal;}
+button{margin: 0;padding: 5px;}
+.clearfix{*zoom : 1;}
+.clearfix:after{line-height: 0;content: "";clear: both;display: table;};
+
+h1{font-size: 20px;}
+
+.demo{padding: 5px;}

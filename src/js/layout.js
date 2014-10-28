@@ -1,5 +1,5 @@
 /*
-simple-layout by weeksun23 2014-05-31
+yuri-layout by weeksun23 2014-05-31
 */
 (function($,undefined){
 	"use strict";
@@ -284,7 +284,7 @@ simple-layout by weeksun23 2014-05-31
 					var boxInfo = dealBox(regionOpts.border,regionOpts.padding);
 					var cssObj = boxInfo.css;
 					var style;
-					$region.addClass("layout-item simple-border layout-" + region);
+					$region.addClass("layout-item ball layout-" + region);
 					if(region === 'center'){
 						//缓存center，最后处理
 						$center = $region;

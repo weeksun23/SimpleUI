@@ -11,57 +11,75 @@
 	</style>
 </head>
 <body>
-	<h1>btn</h1>
-	<p>
-		<button>test</button>
-		<button data-options="type:'info',iconCls:'icon-edit'">test</button>
-		<button data-options="type:'primary',iconCls:'icon-add'">test</button>
-		<button data-options="type:'warning',iconCls:'icon-remove'">test</button>
-		<button data-options="type:'danger',iconCls:'icon-ok'">test</button>
-		<button data-options="type:'success',iconCls:'icon-cancel'">test</button>
+	<p id='operP'>
+		<a href='#' data-size='0' data-options="grp:'size'">nosize</a>
+		<a href='#' data-size='1' data-options="grp:'size'">size1</a>
+		<a href='#' data-size='2' data-options="grp:'size'">size2</a>
+		<a href='#' data-size='3' data-options="grp:'size'">size3</a>
 	</p>
-	<p>
-		<a href='#'>test</a>
-		<a href='#' data-options="type:'info',iconCls:'icon-edit'">test</a>
-		<a href='#' data-options="type:'primary',iconCls:'icon-add'">test</a>
-		<a href='#' data-options="type:'warning',iconCls:'icon-remove'">test</a>
-		<a href='#' data-options="type:'danger',iconCls:'icon-ok'">test</a>
-		<a href='#' data-options="type:'success',iconCls:'icon-cancel'">test</a>	
-	</p>
-	<p>
-		<a href='#' data-options="toggle:true,disabled:true">test</a>
-		<a href='#' data-options="type:'info',iconCls:'icon-edit',toggle:true">test</a>
-		<a href='#' data-options="type:'primary',iconCls:'icon-add',toggle:true">test</a>
-		<a href='#' data-options="type:'warning',iconCls:'icon-remove',toggle:true">test</a>
-		<a href='#' data-options="type:'danger',iconCls:'icon-ok',toggle:true">test</a>
-		<a href='#' data-options="type:'success',iconCls:'icon-cancel',toggle:true">test</a>	
-	</p>
-	<h2>grp:aaa</h2>
-	<p style="font-size:0px">
-		<a href='#' data-options="grp:'aaa',disabled:false">test</a>
-		<a href='#' data-options="iconCls:'icon-edit',grp:'aaa'">test</a>
-		<a href='#' data-options="iconCls:'icon-add',grp:'aaa'">test</a>
-		<a href='#' data-options="iconCls:'icon-remove',grp:'aaa'">test</a>
-		<a href='#' data-options="iconCls:'icon-ok',grp:'aaa'">test</a>
-		<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa'">test</a>	
-	</p>
-	<h2>grp:aaa1</h2>
-	<p style="font-size:0px" id='ppppp'>
-		<a href='#' data-options="grp:'aaa1',disabled:false">test</a>
-		<a href='#' data-options="iconCls:'icon-edit',grp:'aaa1'">test</a>
-		<a href='#' data-options="iconCls:'icon-add',grp:'aaa1'">test</a>
-		<span id='remove'>
-			<a id='remove11' href='#' data-options="iconCls:'icon-remove',grp:'aaa1',disabled:true">test</a>
-			<a href='#' data-options="iconCls:'icon-ok',grp:'aaa1'">test</a>
-			<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa1',disabled:true">test</a>	
-		</span>
-	</p>
+	<hr>
+	<div id='btnArea'>
+		<h1>btn</h1>
+		<p>
+			<button>测试</button>
+			<button data-options="type:'info',iconCls:'icon-edit'">测试</button>
+			<button data-options="type:'primary',iconCls:'icon-add'">测试</button>
+			<button data-options="type:'warning',iconCls:'icon-remove'">测试</button>
+			<button data-options="type:'danger',iconCls:'icon-ok'">测试</button>
+			<button data-options="type:'success',iconCls:'icon-cancel'">测试</button>
+		</p>
+		<p>
+			<a href='#'>测试</a>
+			<a href='#' data-options="type:'info',iconCls:'icon-edit'">测试</a>
+			<a href='#' data-options="type:'primary',iconCls:'icon-add'">测试</a>
+			<a href='#' data-options="type:'warning',iconCls:'icon-remove'">测试</a>
+			<a href='#' data-options="type:'danger',iconCls:'icon-ok'">测试</a>
+			<a href='#' data-options="type:'success',iconCls:'icon-cancel'">测试</a>	
+		</p>
+		<p>
+			<a href='#' data-options="toggle:true,disabled:true">测试</a>
+			<a href='#' data-options="type:'info',iconCls:'icon-edit',toggle:true">测试</a>
+			<a href='#' data-options="type:'primary',iconCls:'icon-add',toggle:true">测试</a>
+			<a href='#' data-options="type:'warning',iconCls:'icon-remove',toggle:true">测试</a>
+			<a href='#' data-options="type:'danger',iconCls:'icon-ok',toggle:true">测试</a>
+			<a href='#' data-options="type:'success',iconCls:'icon-cancel',toggle:true">测试</a>	
+		</p>
+		<h2>grp:aaa</h2>
+		<p>
+			<a href='#' data-options="grp:'aaa',disabled:false">测试</a>
+			<a href='#' data-options="iconCls:'icon-edit',grp:'aaa'">测试</a>
+			<a href='#' data-options="iconCls:'icon-add',grp:'aaa'">测试</a>
+			<a href='#' data-options="iconCls:'icon-remove',grp:'aaa'">测试</a>
+			<a href='#' data-options="iconCls:'icon-ok',grp:'aaa'">测试</a>
+			<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa'">测试</a>	
+		</p>
+		<h2>grp:aaa1</h2>
+		<p id='ppppp'>
+			<a href='#' data-options="grp:'aaa1',disabled:false">测试</a>
+			<a href='#' data-options="iconCls:'icon-edit',grp:'aaa1'">测试</a>
+			<a href='#' data-options="iconCls:'icon-add',grp:'aaa1'">测试</a>
+			<span id='remove'>
+				<a id='remove11' href='#' data-options="iconCls:'icon-remove',grp:'aaa1',disabled:true">测试</a>
+				<a href='#' data-options="iconCls:'icon-ok',grp:'aaa1'">测试</a>
+				<a href='#' data-options="iconCls:'icon-cancel',grp:'aaa1',disabled:true">测试</a>	
+			</span>
+		</p>
+	</div>
+	
 	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
 	<script src='../src/js/base.js'></script>
 	<script src='../src/js/btn.js'></script>
 	<script>
 		$(function(){
 			$("button,a").btn();
+			$("#operP a[data-size]").click(function(){
+				$("#btnArea a").btn("updateOptions",{
+					size : $(this).attr("data-size")
+				});
+				$("#btnArea button").btn("updateOptions",{
+					size : $(this).attr("data-size")
+				});
+			});
 		});
 	</script>
 </body>

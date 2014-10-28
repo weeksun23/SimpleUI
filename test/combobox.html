@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../src/css/demo.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/base.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../src/css/combobox.css">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<div style='margin:5px;'>
+		<span id='test1' name='test11'></span>
+		<button id='getValue'>getValue</button>
+		<button id='setValue'>setValue</button>
+		<button id='clear'>clear</button>
+		<button id='select'>select</button>
+		<button id='toggleDisabled'>toggleDisabled</button>
+		<button id='loadData'>loadData</button>
+		<button id='setFirstValue'>setFirstValue</button>
+		<button id='editable'>editable</button>
+		<button id='text'>text</button>
+	</div>
+	<script src='../lib/jquery/jquery-1.10.2.min.js'></script>
+	<script src='../src/js/base.js'></script>
+	<script src='../src/js/combobox.js'></script>
+	<script>
+		$(function(){
+			$("#test1").combobox({
+				data : [{
+					text : '空',value : ''
+				},{
+					text : "0",value : 0
+				},{
+					text : "null",value : null
+				},{
+					text : "undefined",value : undefined
+				},{
+					text : "1",value : 1
+				},{
+					text : "2",value : 2
+				}],
+				onSelect : function(item){
+					console.log('select',this,item);
+				},
+				onUnSelect : function(item){
+					console.log('unSelect',this,item);
+				},
+				multiple : true
+			});
+			$("#getValue").click(function(){
+				var value = $("#test1").combobox("getValue");
+				console.log(value);
+			});
+			$("#setValue").click(function(){
+				$("#test1").data("options").multiple ? 
+					$("#test1").combobox("setValue",['',0,undefined,1]) : 
+					$("#test1").combobox("setValue",1);
+			});
+			$("#clear").click(function(){
+				$("#test1").combobox("clear");
+			});
+			$("#select").click(function(){
+				$("#test1").data("options").multiple ? 
+					$("#test1").combobox("select",['',0,undefined,1]) : 
+					$("#test1").combobox("select",1);
+			});
+			$("#toggleDisabled").click(function(){
+				$("#test1").combobox("disabled",!$("#test1").hasClass("combobox-disabled"));
+			});
+			$("#loadData").click(function(){
+				var data = [];
+				for (var i =100; i >= 0; i--) {
+					data.push({
+						value : i,text : i ,other : 1,hi : '3344'
+					});
+				};
+				$("#test1").combobox("loadData",data);
+			});
+			$("#setFirstValue").click(function(){
+				$("#test1").combobox("setFirstValue");
+			});
+			$("#editable").click(function(){
+				var options = $("#test1").data("options");
+				$("#test1").combobox("updateOptions",{
+					editable : !options.editable
+				});
+			});
+			$("#text").click(function(){
+				console.log($("#test1").combobox("text"));
+			});
+		});
+	</script>
+</body>
+</html>

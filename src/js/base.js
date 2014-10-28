@@ -1,3 +1,13 @@
+/*调试*/
+function log(){
+	console.log.apply(console,arguments);
+}
+/*
+$.fn.plugin
+$.fn.plugin.defaultOptions
+$.fn.plugin.methods
+$.fn.plugin.init
+*/
 (function($){
 	'use strict';
 	/*

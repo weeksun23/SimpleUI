@@ -1,3 +1,5 @@
 body,html{width: 100%;height: 100%;}
 body{margin: 0;}
-.simple-border{border-style: solid;border-color: #d2d2d2;}
+/*border style*/
+.ball{border:1px solid #d2d2d2;}
+.bbottom{border-bottom: 1px solid #d2d2d2}
